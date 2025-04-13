@@ -20,6 +20,8 @@ const sqlite3 = require('sqlite3')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
+const PORT = process.env.PORT || 3000
+
 let db = null
 
 const intializeDbAndServer = async () => {
@@ -29,7 +31,7 @@ const intializeDbAndServer = async () => {
       driver: sqlite3.Database,
     })
 
-    app.listen(3000, () => {
+    app.listen(PORT, () => {
       console.log('Server running at http://localhost:3000')
     })
   } catch (e) {
