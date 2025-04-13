@@ -4,7 +4,7 @@
   "main": "index.js",
   "engines": {
     "node": "20.17.0",
-    "npm": "'10.9.2'"
+    "npm": "10.9.2"
   },
   "scripts": {
     "start": "nodemon --exec babel -node index.js",
