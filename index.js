@@ -124,7 +124,7 @@ app.post('/login', async (request, response) => {
   
     if (jwtToken === undefined) {
       response.status(401)
-      response.json('Invalid JWT Token')
+      response.json('Didnot JWT Token')
     } else {
       jwt.verify(jwtToken, 'userDetails', async (error, payload) => {
         if (error) {
@@ -150,6 +150,8 @@ app.post('/login', async (request, response) => {
     `
 
     const allCategories = await db.all(getAllCategoriesQuery)
+
+    response.status(200)
     response.json(allCategories)
   })
 
