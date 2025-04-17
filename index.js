@@ -105,7 +105,7 @@ app.post('/login', async (request, response) => {
             gender: dbUser.gender,
           }
           const jwtToken = jwt.sign(payload, 'userDetails')
-          response.json({jwtToken})
+          response.json(sjwtToken)
       } else {
         response.status(400)
         response.json('Invalid password')
