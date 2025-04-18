@@ -27,9 +27,9 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZGl0eWFfYW1tdSIsIm5hbWUiOiJBZGl0eWEiLCJnZW5kZXIiOiJNYWxlIiwiaWF0IjoxNzQ0NTUxMzYyfQ.mIHfhGm983QkgTHoWXZz7cnit3xWQfmuYmdDa0_AEMk
 
 {
-    "categoryName": "Accessories",
-    "itemCount": 30,
-    "categoryImage": "https://res.cloudinary.com/dtrjr55q7/image/upload/v1744552270/smiling-lady-model-short-blue-dress-hat-barfoot-white_gftfjt.jpg"
+    "categoryName": "Cotton Clothes",
+    "itemCount": 150,
+    "categoryImage": "https://res.cloudinary.com/dtrjr55q7/image/upload/v1744823889/portrait-handsome-young-man_feul9k.jpg"
 }
 ###
 
