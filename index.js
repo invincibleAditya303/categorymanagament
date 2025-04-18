@@ -124,7 +124,7 @@ app.post('/login', async (request, response) => {
   
     if (jwtToken === undefined) {
       response.status(401)
-      response.json('Didnot JWT Token')
+      response.json(`authecationError: ${authHeader}`)
     } else {
       jwt.verify(jwtToken, 'userDetails', async (error, payload) => {
         if (error) {
