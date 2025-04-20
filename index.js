@@ -10,6 +10,12 @@ app.use(cors({
   }))
 
 require('dotenv').config()
+const cloudinary = require('cloudinary').v2
+
+cloudinary.config({cloud_name: process.env.CLOUD_NAME})
+
+const multer = require('multer')
+const {CloudinaryStorage} = require('multer-storage-cloudinary')
 
 const path = require('path')
 const dbPath = path.join(__dirname, 'userData.db')
@@ -23,6 +29,16 @@ const jwt = require('jsonwebtoken')
 const PORT = process.env.PORT || 3000
 
 let db = null
+
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: 'categories',
+    allowed_formats: ['jpg', 'jpeg', 'png']
+  }
+})
+
+const upload = multer({storage: storage})
 
 const intializeDbAndServer = async () => {
   try {
@@ -156,8 +172,9 @@ app.post('/login', async (request, response) => {
   })
 
   //Add new category API
-  app.post('/categories', authencationToken, async (request, response) => {
-    const {categoryName, itemCount, categoryImage} = request.body
+  app.post('/categories', authencationToken, upload.single('categoryImage'), async (request, response) => {
+    const {categoryName, itemCount} = request.body
+    const categoryImage = request.file.path
 
     const getCategoryQuery = `
         SELECT
