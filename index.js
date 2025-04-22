@@ -231,7 +231,23 @@ app.put('/categories/:categoryId', authencationToken, upload.single('categoryIma
     let categoryImage = existingCategory.category_image
 
     if (req.file) {
-      categoryImage = request.file.path
+      try {
+        const result = await cloudinary.uploader.upload_stream(
+          { resource_type: 'image' },
+          (error, result) => {
+            if (error) {
+              throw new Error('Failed to upload image');
+            }
+            categoryImage = result.secure_url;
+          }
+        );
+        const bufferStream = new Readable();
+        bufferStream.push(request.file.buffer);
+        bufferStream.push(null);
+        bufferStream.pipe(result);
+      } catch (error) {
+        return response.status(500).json({ error: error.message });
+      }
     }
   
     const updateCategoryQuery = `
