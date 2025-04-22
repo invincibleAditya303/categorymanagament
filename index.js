@@ -255,7 +255,7 @@ app.put('/categories/:categoryId', authencationToken, upload.single('categoryIma
         category
       SET
         category_name = "${categoryName}",
-        item_count = "${itemCount}",
+        item_count = ${itemCount},
         category_image = "${categoryImage}"
       WHERE
         category_id = ${categoryId};    
