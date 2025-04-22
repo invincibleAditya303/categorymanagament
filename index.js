@@ -228,7 +228,11 @@ app.put('/categories/:categoryId', authencationToken, upload.single('categoryIma
       itemCount = existingCategory.item_count,
     } = request.body
 
-    const categoryImage = request.file.path===null ? existingCategory.categoryImage : request.file.path
+    let categoryImage = existingCategory.category_image
+
+    if (req.file) {
+      categoryImage = request.file.path
+    }
   
     const updateCategoryQuery = `
       UPDATE
