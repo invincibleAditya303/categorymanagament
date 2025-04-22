@@ -273,12 +273,16 @@ app.put('/categories/:categoryId', authencationToken, upload.single('categoryIma
     `
   
     const updatedCategory = await db.get(updatedCategoryQuery)
-  
-    if (existingCategory.category_name !== updatedCategory.category_name) {
-      response.json('CategoryName Updated')
-    } else if (existingCategory.item_count !== updatedCategory.item_count) {
-      response.json('ItemCount Updated')
+    
+    isCategoryNameUpdated = existingCategory.category_name === updatedCategory.category_name
+    isItemCountUpdated = existingCategory.item_count === updatedCategory.item_count
+    isCategoryImageUpdated = existingCategory.category_image === updatedCategory.category_image
+
+    if (isCategoryNameUpdated && isItemCountUpdated && isCategoryImageUpdated) {
+      response.json('All Fields Updated')
+    } else if (isCategoryNameUpdated || isItemCountUpdated || isCategoryImageUpdated) {
+      response.json('Category Item Updated')
     } else {
-      response.json('CategoryImage Updated')
+      response.json('Please Edit any fields to update')
     }
   })
