@@ -230,7 +230,7 @@ app.put('/categories/:categoryId', authencationToken, upload.single('categoryIma
 
     let categoryImage = existingCategory.category_image
 
-    if (req.file) {
+    if (request.file) {
       try {
         const result = await cloudinary.uploader.upload_stream(
           { resource_type: 'image' },
