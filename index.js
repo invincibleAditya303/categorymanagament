@@ -209,7 +209,7 @@ app.post('/login', async (request, response) => {
   })
 
 //Updating Category API
-app.put('/categories/:categoryId/', async (request, response) => {
+app.put('/categories/:categoryId', authencationToken, upload.single('categoryImage'), async (request, response) => {
     const {categoryId} = request.params
   
     const getExistingCategoryQuery = `
@@ -226,10 +226,9 @@ app.put('/categories/:categoryId/', async (request, response) => {
     const {
       categoryName = existingCategory.category_name,
       itemCount = existingCategory.item_count,
-      categoryImage = existingCategory.category_image,
     } = request.body
-  
-    console.log(request.body)
+
+    const {categoryImage=existingCategory.categoryImage} = request.file
   
     const updateCategoryQuery = `
       UPDATE
