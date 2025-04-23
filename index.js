@@ -4,10 +4,24 @@ const app = express()
 const cors = require('cors')
 app.use(express.json())
 
-app.use(cors({
-    origin: 'http://localhost:3000', // your frontend origin
-    credentials: true // if you're using cookies
-  }))
+const allowedOrigins = [
+  'http://localhost:3000', // Local development
+  'https://categorieslist.onrender.com', // Production domain
+]
+
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+  methods: 'GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE',
+};
+
+app.use(cors(corsOptions))
 
 require('dotenv').config()
 const cloudinary = require('cloudinary').v2
